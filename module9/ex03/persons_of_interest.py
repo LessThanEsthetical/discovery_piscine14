@@ -8,12 +8,12 @@ women_scientists = {
 }
 
 def famous_births(ls):
-	ls = ls.values()
-	ls = sorted(ls, lambda x: x["date_of_birth"])
-	return f"{ls['name']} is a great scientist born in {ls['date_of_birth']}."
+	ls = dict(sorted(ls.items(), key=lambda x: x[1]["date_of_birth"]))
+	for i in ls.values():
+		yield f"{i['name']} is a great scientist born in {i['date_of_birth']}."
 
 def main():
-	print(famous_births(women_scientists))
+	print(*(i for i in famous_births(women_scientists)), sep="\n")
 
 if __name__ == "__main__":
 	main()
